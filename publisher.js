@@ -7,22 +7,22 @@ const pushDataToRedis = () => {
     redisPublisher.on('connect', () => {
         console.log('Connected to Redis Server!!!!')
     });
-
+    const {Ts, NumP, Vit, PosC, DrDp, Tcle, Dcle, Pcen, Eprm, Dcor} = data.Ctxt;
+    
     setInterval(() => {
         const key = Date.now();
-        const {Ts, NumP, Vit, PosC, DrDp, Tcle, Dcle, Pcen, Eprm, Dcor } = data.Ctxt;
         const newData = {
-            [key] : {
-                "Ts": Ts, 
-                "NumP": NumP, 
-                "Vit": Vit, 
-                "PosC": PosC, 
-                "DrDp": DrDp, 
-                "Tcle": Tcle,
-                "Dcle": Dcle, 
-                "Pcen": Pcen,
-                "Eprm": Eprm,
-                "Dcor": Dcor,
+            key : {
+                Ts, 
+                NumP, 
+                Vit, 
+                PosC, 
+                DrDp, 
+                Tcle, 
+                Dcle, 
+                Pcen, 
+                Eprm, 
+                Dcor 
             }
         }
         redisPublisher.publish('dataFromWebsocket', JSON.stringify(newData));
